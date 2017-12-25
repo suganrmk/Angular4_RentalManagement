@@ -1,0 +1,13 @@
+<div class="productHolder">
+    <img src="http://themes.pcubelive.com/pcubeshop/images/sunglasses.jpg" />
+
+    <a class="productcontent" [routerLink]="['/product', productId]">
+        <span class="productName">{{productName}}</span>
+        <span class="productprice">$ {{productPrice}}</span>
+
+
+    </a>
+    <div class="contentbot">
+        <button (click)="addtoCart(productId)" class="btn btn-primary cartbtn">Add to Cart</button>
+    </div>
+</div>

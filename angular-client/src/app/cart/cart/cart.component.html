@@ -1,0 +1,14 @@
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Cart
+        </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <ul>
+            <li *ngFor="let items of cartItems">
+                <a class="dropdown-item" href="#">{{items.productName}}</a>
+                <button (click)="remove(items.productId)" type="button">Remove</button>
+            </li>
+        </ul>
+        <button class="Checkout">Checkout</button>
+    </div>
+</div>
