@@ -20,13 +20,15 @@ import { RegisterComponent } from './register/index';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './landing/home.component';
 import {HeaderComponent} from './header/header.component';
-import { ProductRoutingModule } from './product/product-routing/product-routing.module';
+// import { ProductRoutingModule } from './product/product-routing/product-routing.module';
 import { ProductService } from './product/product.service';
 import { ProductListComponent } from './product/product-list/product-list.component';
+import {ProductCatComponent} from './product/productlist/productlist.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import {ProductsingleComponent} from './product/product-single/product-single.component';
 import {ProductarrayComponent} from './product/product-array/product-array.component';
 import {CartComponent} from './cart/cart/cart.component';
+import {CheckoutComponent} from './cart/checkout/checkout.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,12 +42,13 @@ import {CartComponent} from './cart/cart/cart.component';
     RegisterComponent,
     ProductsingleComponent,
     ProductarrayComponent,
-    CartComponent
+    ProductCatComponent,
+    CartComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    ProductRoutingModule,
     FormsModule,
     routing,
   ],

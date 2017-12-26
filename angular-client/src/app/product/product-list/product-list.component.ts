@@ -27,6 +27,7 @@ export class ProductListComponent implements OnInit {
   }
 
   AddProduct(product: any): void {
+    console.log(product)
     if (!product) { return; }
     this.productService.createProduct(product)
       .then(td => {
@@ -42,6 +43,14 @@ export class ProductListComponent implements OnInit {
     // console.log(product)
     this.productToEdit = product;
     this.apiMessage = " ";
+  }
+  getFiles(fl){
+   console.log(fl)
+  }
+
+  showAddProductBox(e): void {
+    e.preventDefault();
+    this.productService.showAddProductBox = !this.productService.showAddProductBox;
   }
 
   EditProduct(product: any): void {

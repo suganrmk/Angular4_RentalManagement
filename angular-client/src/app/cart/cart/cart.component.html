@@ -1,14 +1,19 @@
-<div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Cart
+<div class="dropdown cartlistdropdown">
+    <button class="cartbtn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            <span *ngIf="this.cartItems" class="cartnum">{{this.cartItems.length}}</span>
         </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <ul>
+        <ul class="cartlist">
             <li *ngFor="let items of cartItems">
                 <a class="dropdown-item" href="#">{{items.productName}}</a>
-                <button (click)="remove(items.productId)" type="button">Remove</button>
+                <span>{{items.productPrice}}</span>
+                <button (click)="remove(items._id)" class="closeicon" type="button"><i class="fa fa-close"></i></button>
             </li>
         </ul>
-        <button class="Checkout">Checkout</button>
+        <div class="cartbottom">
+            <span class="total">Total: $5959</span>
+            <button [routerLink]="['/checkout']" class="Checkout">Checkout</button>
+        </div>
     </div>
 </div>

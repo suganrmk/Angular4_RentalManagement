@@ -18,6 +18,8 @@ export class ProductsingleComponent implements OnInit {
   @Input() productPrice;
   @Input() productId;
   cartProduct: any;
+  addedProduct: any;
+
   constructor(
     private userService: UserService,
     private productService: ProductService,
@@ -28,8 +30,16 @@ export class ProductsingleComponent implements OnInit {
   }
 
   addtoCart(id) {
-    this.cartService.cartItems.subscribe(res =>  this.cartProduct = res);
-    this.cartProduct.cart.push({ productId: id });
-    this.userService.update(this.cartProduct).subscribe(res => console.log(res));
+    this.productService.getProduct(id).then(td => {
+      this.addedProduct = td.product[0];
+      this.cartService.cartItems.subscribe(res => this.cartProduct = res);
+     const filterproduct = this.cartProduct.cart.filter(t => t._id == id);
+     if (filterproduct.length === 0) {
+      this.cartProduct.cart.push(this.addedProduct);
+      this.userService.update(this.cartProduct).subscribe(res => console.log(res));
+     }else {
+       alert('already added to cart');
+     }
+    });
   }
 }
