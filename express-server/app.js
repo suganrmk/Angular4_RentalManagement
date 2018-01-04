@@ -6,6 +6,7 @@ import logger from 'morgan';
 import mongoose from 'mongoose';
 import SourceMapSupport from 'source-map-support';
 import bb from 'express-busboy';
+var multer = require("multer");
 
 var cors = require('cors');
 var bodyParser = require('body-parser');
@@ -19,7 +20,7 @@ import productRoutes from './routes/product.server.route';
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // allow-cors
@@ -35,8 +36,17 @@ app.use(function(req, res, next) {
     }
 });
 
+
+
+
+
+// app.post("/upload", multer({ dest: "./uploads/" }).array("myfile[]", 12), function(req, res) {
+//     console.log(req.files)
+//     res.send(req.files);
+// });
+
 // express-busboy to parse multipart/form-data and x-www-form-urlencoded both
-bb.extend(app);
+// bb.extend(app);
 
 
 
@@ -57,7 +67,7 @@ app.use(expressJwt({
         }
         return null;
     }
-}).unless({ path: ['/users/authenticate', '/users/register'] }));
+}).unless({ path: ['/users/authenticate', '/users/register', '/product/upload'] }));
 
 // routes
 app.use('/users', require('./controllers/users.controller'));
@@ -80,6 +90,8 @@ app.use('/product', productRoutes);
 app.get('/', (req, res) => {
     return res.end('Api working');
 });
+
+
 
 // catch 404
 app.use((req, res, next) => {

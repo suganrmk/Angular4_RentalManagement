@@ -23,6 +23,19 @@ app-productarray {
     border-radius: 0;
 }
 
+app-checkout .cartlistdropdown .dropdown-menu {
+    border-radius: 0;
+    box-shadow: none;
+    position: static;
+    display: block;
+    width: 100%;
+}
+
+app-checkout .cartbtn,
+app-checkout .Checkout {
+    display: none;
+}
+
 body .navbar-inverse {
     background: #000;
     border: none;

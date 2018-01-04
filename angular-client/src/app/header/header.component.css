@@ -17,6 +17,10 @@ a.navbar-brand {
     font-size: 15px;
 }
 
+.navbar-inverse .navbar-nav>li>a {
+    float: left;
+}
+
 .navbar-brand i {
     margin: 0 10px 0 0;
 }

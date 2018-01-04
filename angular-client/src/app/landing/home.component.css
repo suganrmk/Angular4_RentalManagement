@@ -84,16 +84,31 @@
 
 .banner img {
     height: 860px;
-    margin: -10px 0 0 -380px;
+    margin: -10px 0 0 -370px;
 }
 
 .banner {
     float: left;
     width: 100%;
     overflow: hidden;
-    height: 700px
+    height: 662px
 }
 
 body {
     opacity: 0
+}
+
+.bannerContent {
+    position: absolute;
+    z-index: 999;
+    top: 40%;
+    right: 12%;
+    color: #fff;
+}
+
+.btn-buy {
+    background: #95c41f;
+    padding: 7px 30px;
+    font-size: 21px;
+    color: #fff;
 }

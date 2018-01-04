@@ -1,4 +1,12 @@
 <a (click)="showAddProductBox($event)" href="#">Add Product</a>
+<img width="100" src="blob:http://localhost:9999/a86ffa6c-72b2-470a-9929-ca4a8c8bcba0">
+<!-- <input type="file" (change)="fileChangeEvent($event)" placeholder="Upload file..." />
+<button type="button" (click)="upload()">Upload</button> -->
+<p-fileUpload name="myfile[]" accept="image/*" (onUpload)="onBasicUpload($event, fil)" url="http://localhost:4000/product/upload"></p-fileUpload>
+
+
+
+
 
 <div align="center" class="AddProductBox" [hidden]="productService.showAddProductBox">
     <h4>Add New Product</h4>
@@ -11,12 +19,12 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="productImg">File Upload:{{product.productImg}}</label>
             <input type="file" (change)="getFiles($event)" class="form-control" [(ngModel)]="product.productImg" #productImg="ngModel" name="productImg" id="productImg" required />
             <div [hidden]="productImg.valid || productImg.pristine" class="alert alert-danger">
             </div>
-        </div>
+        </div> -->
 
 
 

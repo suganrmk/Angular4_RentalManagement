@@ -21,16 +21,21 @@ export class CartComponent implements OnInit {
         const filterproduct = this.cartProduct.cart.filter(t => t._id !== id);
         this.cartProduct.cart = filterproduct;
         this.userService.update(this.cartProduct).subscribe(res => {
-            this.cartItems = filterproduct;
+            this.getcartItems();
         });
 
     }
 
     getcartItems() {
         this.cartService.getById('5a3ea24f049feb2bd08934ce').subscribe(res => {
-            this.cartProduct = res;
-            this.cartItems = res.cart;
             this.cartService.cartItems.next(res);
+        });
+
+        this.cartService.cartItems.subscribe(res => {
+            if (res) {
+                this.cartProduct = res;
+                this.cartItems = res.cart;
+            }
         });
     }
 }

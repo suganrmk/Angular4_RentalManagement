@@ -1,5 +1,6 @@
 // ./angular-client/src/app/app.module.ts
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
@@ -29,6 +30,9 @@ import {ProductsingleComponent} from './product/product-single/product-single.co
 import {ProductarrayComponent} from './product/product-array/product-array.component';
 import {CartComponent} from './cart/cart/cart.component';
 import {CheckoutComponent} from './cart/checkout/checkout.component';
+import {FileUploadModule} from 'primeng/primeng';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,13 +48,15 @@ import {CheckoutComponent} from './cart/checkout/checkout.component';
     ProductarrayComponent,
     ProductCatComponent,
     CartComponent,
-    CheckoutComponent
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpModule,
     FormsModule,
     routing,
+    FileUploadModule
   ],
   providers: [
      ProductService,

@@ -3,9 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { ProductService } from '../product.service';
 import { UserService } from '../../_services/user.service';
-
 import { CartService } from '../../_services/index';
-
 
 @Component({
   selector: 'app-product',
