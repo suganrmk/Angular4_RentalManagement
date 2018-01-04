@@ -2,21 +2,26 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { ProductService } from '../product/product.service';
+import { CommonService } from '../_services/common.service';
 
 @Component({
-  selector: 'my-home',
+  selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomePageComponent implements OnInit, OnDestroy {
   products: any[] = [];
-  constructor(private productService: ProductService) { }
+  bannerImg: string;
+  constructor(private productService: ProductService, private commonService: CommonService) { }
 
   ngOnInit(): void {
     document.body.classList.add('home');
 
-    this.productService.getProducts()
-      .then(products => this.products = products.products.reverse().slice(0, 6));
+    this.commonService.getAll('/product/test/homeSliders').subscribe((res) => {
+      console.log(res.sliders[0]);
+      this.bannerImg = res.sliders[0].filename;
+    });
+
   }
   ngOnDestroy() {
     document.body.classList.remove('home');

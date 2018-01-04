@@ -25,6 +25,8 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     this.productService.showAddProductBox = true;
     this.productService.getProducts().then(td => { this.products = td.products; });
+
+    // this.productService.getslider('/product/test/homeSliders').then(td => console.log(td));
   }
 
   AddProduct(product: any): void {
@@ -92,39 +94,6 @@ export class ProductListComponent implements OnInit {
   }
 
 
-  upload() {
-    this.makeFileRequest("http://localhost:4000/upload", [], this.filesToUpload).then((result) => {
-        console.log(result);
-    }, (error) => {
-        console.error(error);
-    });
-}
 
-fileChangeEvent(fileInput: any){
-    this.filesToUpload = <Array<File>> fileInput.target.files;
-  console.log(this.filesToUpload )
-  
-}
-
-makeFileRequest(url: string, params: Array<string>, files: Array<File>) {
-    return new Promise((resolve, reject) => {
-        var formData: any = new FormData();
-        var xhr = new XMLHttpRequest();
-        for(var i = 0; i < files.length; i++) {
-            formData.append("myfile[]", files[i], files[i].name);
-        }
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4) {
-                if (xhr.status == 200) {
-                    resolve(JSON.parse(xhr.response));
-                } else {
-                    reject(xhr.response);
-                }
-            }
-        }
-        xhr.open("POST", url, true);
-        xhr.send(formData);
-    });
-}
 
 }

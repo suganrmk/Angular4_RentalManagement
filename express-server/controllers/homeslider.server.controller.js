@@ -4,15 +4,16 @@ import mongoose from 'mongoose';
 //import models
 import Slider from '../models/slider.server.model';
 
-// export const getslider = (req, res) => {
-//     Product.find().exec((err, products) => {
-//         if (err) {
-//             return res.json({ 'success': false, 'message': 'Some Error in products' });
-//         }
+export const getSliders = (req, res) => {
+    console.log('in')
+    Slider.find().exec((err, sliders) => {
+        if (err) {
+            return res.json({ 'success': false, 'message': 'Some Error in products' });
+        }
 
-//         return res.json({ 'success': true, 'message': 'products fetched successfully', products });
-//     });
-// }
+        return res.json({ 'success': true, 'message': 'products fetched successfully', sliders });
+    });
+}
 
 // app.post("/upload", multer({ dest: "./uploads/" }).array("myfile[]", 12), function(req, res) {
 //     console.log(req.files)
@@ -22,14 +23,12 @@ import Slider from '../models/slider.server.model';
 export const addSlider = (req, res) => {
     console.log(req.files[0])
     const newSlider = new Slider(req.files[0]);
-    console.log(newSlider)
-
     newSlider.save((err, slider) => {
         if (err) {
-            return res.json({ 'success': false, 'message': 'Some Error tod' });
+            return res.json({ 'success': false, 'message': 'Some Error Found' });
         }
 
-        return res.json({ 'success': true, 'message': 'Product added successfully', slider });
+        return res.json({ 'success': true, 'message': 'Slider added successfully', slider });
     })
 }
 

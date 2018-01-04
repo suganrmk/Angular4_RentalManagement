@@ -27,6 +27,13 @@ export class ProductService {
                     .catch(this.handleError)
   }
 
+  getslider(url): Promise<any>{
+    return this.http.get(url)
+                    .toPromise()
+                    .then(this.handleData)
+                    .catch(this.handleError)
+  }
+
   createProduct(product:any): Promise<any>{
     return this.http.post(this.productApi, product)
                .toPromise()

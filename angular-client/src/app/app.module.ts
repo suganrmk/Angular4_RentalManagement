@@ -12,7 +12,7 @@ import { routing } from './app.routing';
 import { customHttpProvider } from './_helpers/index';
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
-import { AlertService, AuthenticationService, UserService , CartService } from './_services/index';
+import { AlertService, AuthenticationService, UserService , CartService, CommonService } from './_services/index';
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
@@ -65,6 +65,7 @@ import {FileUploadModule} from 'primeng/primeng';
      AlertService,
      CartService,
      AuthenticationService,
+     CommonService,
      UserService ],
   bootstrap: [AppComponent]
 })

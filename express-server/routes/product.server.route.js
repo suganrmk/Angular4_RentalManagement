@@ -1,6 +1,16 @@
 // ./express-server/routes/product.server.route.js
 import express from 'express';
 var multer = require("multer");
+var storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, '../angular-client/src/assets/uploads/')
+    },
+    filename: function(req, file, cb) {
+        cb(null, Date.now() + '.jpg') //Appending .jpg
+    }
+})
+
+var upload = multer({ storage: storage });
 
 //import controller file
 import * as productController from '../controllers/product.server.controller';
@@ -21,8 +31,11 @@ router.route('/:id')
     .get(productController.getProduct)
     .delete(productController.deleteProduct);
 
-//Home Slider
-router.post('/upload', multer({ dest: "./uploads/" }).array("myfile[]", 12), homesliderController.addSlider);
 
+
+//Home Slider
+router.post('/upload', upload.array("myfile[]", 12), homesliderController.addSlider);
+
+router.route('/test/homeSliders').get(homesliderController.getSliders);
 
 export default router;

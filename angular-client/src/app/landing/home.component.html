@@ -1,11 +1,11 @@
 <div class="banner">
-    <img src="https://demo2.chethemes.com/html/rimbus/assets/images/sliders/1.jpg" />
+    <img *ngIf="bannerImg" src='./assets/uploads/{{bannerImg}}' />
 
     <div class="bannerContent">
         <h1>Awesome Fashion 2017</h1>
         <h2>New Arrivals Collection</h2>
         <br>
-        <button [routerLink]="['/productlist']" class="btn btn-buy">Shop Now</button>
+        <button [routerLink]="['/productlist ']" class="btn btn-buy">Shop Now</button>
     </div>
 </div>
 <div class="container">
