@@ -15,6 +15,8 @@ var config = require('config.json');
 
 // import routes
 import productRoutes from './routes/product.server.route';
+import route from './route';
+
 
 // define our app using express
 const app = express();
@@ -85,7 +87,7 @@ mongoose.connect('mongodb://localhost/mern-todo-app', {
 SourceMapSupport.install();
 
 app.use('/product', productRoutes);
-
+app.use('/route', route);
 
 app.get('/', (req, res) => {
     return res.end('Api working');

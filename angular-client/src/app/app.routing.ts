@@ -14,7 +14,8 @@ import {ProductCatComponent} from './product/productlist/productlist.component';
 import {CheckoutComponent} from './cart/checkout/checkout.component';
 
 
-const appRoutes: Routes = [
+
+export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
@@ -24,7 +25,8 @@ const appRoutes: Routes = [
     { path: 'product/:id', component: ProductDetailComponent },
     {path: 'productlist', component: ProductCatComponent},
     {path: 'checkout', component: CheckoutComponent},
-    
+    // loading modules
+    { path: 'admin', loadChildren: 'app/admin/admin.module#AdminModule' },
     // otherwise redirect to home
     { path: '**', redirectTo: 'home' }
 ];

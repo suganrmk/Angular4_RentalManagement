@@ -1,0 +1,41 @@
+<p-panel>
+    <p-header> Slider
+        <button (click)="showDialog()" class="btn btn-xs btn-primary pull-right">
+                   <i class="fa fa-plus"></i> Add Slider
+        </button>
+    </p-header>
+    <p-dataTable class="" [value]="sliderData">
+        <p-column field="bannerImg" header="Banner Image" [style]="{'width':'120px'}">
+            <ng-template let-col let-data="rowData" pTemplate="body">
+                <img width="100px" src="{{data[col.field]}}">
+            </ng-template>
+        </p-column>
+        <p-column field="title" header="Title"></p-column>
+        <p-column field="subtitle" header="Sub Title"></p-column>
+        <p-column field="subtitle" header="Action" [style]="{'width':'90px'}">
+            <ng-template let-col let-data="rowData" pTemplate="body">
+                <button type="button" (click)="showDialog(data)" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></button>
+                <button type="button" (click)="onDeleteSlider(data)" class="btn btn-warning btn-xs"><i class="fa fa-close"></i></button>
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+</p-panel>
+
+<p-dialog [(visible)]="display">
+    <p-header> Slider</p-header>
+    <form (ngSubmit)="onSubmitSlider(sliders);" #sliderForm="ngForm">
+        <div class="form-group">
+            <label for="bannerImg">Banner Image:</label>
+            <input type="text" [(ngModel)]="sliders.bannerImg" #bannerImg="ngModel" class="form-control" name="bannerImg" id="bannerImg" required />
+        </div>
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" [(ngModel)]="sliders.title" #title="ngModel" class="form-control" name="title" id="title" required />
+        </div>
+        <div class="form-group">
+            <label for="subtitle">Sub Title:</label>
+            <input type="text" [(ngModel)]="sliders.subtitle" #subtitle="ngModel" class="form-control" name="subtitle" id="subtitle" required />
+        </div>
+        <button type="submit" [disabled]="!sliderForm.form.valid" class="btn btn-success btn-block">Submit</button>
+    </form>
+</p-dialog>
