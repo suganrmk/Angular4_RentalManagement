@@ -1,0 +1,33 @@
+<form (ngSubmit)="onSubmitSlider(products);" #productForm="ngForm">
+    <button type="submit" class="btn btn-success btn-block">Save And Exit</button>
+    <p-tabView [activeIndex]="index" orientation="left">
+        <p-tabPanel header="Header 1">
+            <div class="form-group">
+                <label for="ProductType">ProductType:</label>
+                <input type="text" [(ngModel)]="products.ProductType" #ProductType="ngModel" class="form-control" name="ProductType" id="ProductType" required />
+            </div>
+            <div class="form-group">
+                <label for="RoomType">RoomType:</label>
+                <input type="text" [(ngModel)]="products.RoomType" #RoomType="ngModel" class="form-control" name="RoomType" id="RoomType" required />
+            </div>
+            <div class="form-group">
+                <label for="Accommodates">Accommodates:</label>
+                <input type="text" [(ngModel)]="products.Accommodates" #Accommodates="ngModel" class="form-control" name="Accommodates" id="Accommodates" required />
+            </div>
+            <div class="form-group">
+                <label for="City">City:</label>
+                <input type="text" [(ngModel)]="products.City" #City="ngModel" class="form-control" name="City" id="City" required />
+            </div>
+
+
+        </p-tabPanel>
+        <p-tabPanel header="Header 2">
+            Content 2
+        </p-tabPanel>
+        <p-tabPanel header="Header 3">
+            Content 3
+        </p-tabPanel>
+    </p-tabView>
+    <button type="button" pButton icon="fa fa-chevron-up" (click)="openPrev()"><i class="fa fa-chevron-up"></i> Previous</button>
+    <button type="button" pButton icon="fa fa-chevron-down" (click)="openNext()"><i class="fa fa-chevron-down"></i> Next</button>
+</form>

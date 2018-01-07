@@ -4,7 +4,7 @@ import { ModuleWithProviders } from '@angular/core';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SliderComponent } from './slider/slider.component';
-
+import {ProductComponent} from './product/product.component';
 
 const routes: Routes = [
   {
@@ -14,6 +14,10 @@ const routes: Routes = [
       {
         path: 'slider',
         component: SliderComponent
+      },
+      {
+        path: 'product',
+        component: ProductComponent
       }
     ]
   }

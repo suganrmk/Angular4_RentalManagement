@@ -7,8 +7,10 @@ import { FormGroup, FormControl, FormBuilder , FormsModule } from '@angular/form
 import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SliderComponent } from './slider/slider.component';
-import {DataTableModule, SharedModule , DialogModule , PanelModule} from 'primeng/primeng';
+import {DataTableModule, TabViewModule, SharedModule , DialogModule , PanelModule} from 'primeng/primeng';
 import { CommonServices } from './provider/common.service';
+import { ProductComponent } from './product/product.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   imports: [
@@ -18,13 +20,14 @@ import { CommonServices } from './provider/common.service';
     SharedModule,
     DialogModule,
     PanelModule,
+    TabViewModule,
     ReactiveFormsModule,
     FormsModule
   ],
   providers: [
     CommonServices
      ],
-  declarations: [DashboardComponent, SliderComponent]
+  declarations: [DashboardComponent, SliderComponent, ProductComponent, UsersComponent]
 })
 export class AdminModule { }
 
