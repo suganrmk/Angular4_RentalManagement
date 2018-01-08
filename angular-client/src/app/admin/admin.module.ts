@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule} from '@angular/forms';
-
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormControl, FormBuilder , FormsModule } from '@angular/forms';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SliderComponent } from './slider/slider.component';
-import {DataTableModule, TabViewModule, SharedModule , DialogModule , PanelModule} from 'primeng/primeng';
+import {DataTableModule, SelectButtonModule, CalendarModule, TabViewModule, SharedModule,
+   DialogModule , DropdownModule, CheckboxModule, PanelModule, FileUploadModule} from 'primeng/primeng';
 import { CommonServices } from './provider/common.service';
 import { ProductComponent } from './product/product.component';
 import { UsersComponent } from './users/users.component';
+import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
 
 @NgModule({
   imports: [
@@ -18,11 +21,17 @@ import { UsersComponent } from './users/users.component';
     AdminRoutingModule,
     DataTableModule,
     SharedModule,
+    SelectButtonModule,
     DialogModule,
     PanelModule,
     TabViewModule,
+    CheckboxModule,
+    CalendarModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    DropdownModule,
+    FileUploadModule,
+    Ng4GeoautocompleteModule.forRoot()
   ],
   providers: [
     CommonServices

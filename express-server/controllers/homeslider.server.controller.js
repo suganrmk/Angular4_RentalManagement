@@ -2,7 +2,7 @@
 import mongoose from 'mongoose';
 
 //import models
-// import Slider from '../models/slider.server.model';
+import FileUpload from '../models/fileupload.server.model.';
 import HomeSlider from '../models/slider.server.model';
 
 export const getHomeSliders = (req, res) => {
@@ -64,17 +64,17 @@ export const deleteHomeSlider = (req, res) => {
 //     res.send(req.files);
 // });
 
-// export const addSlider = (req, res) => {
-//     console.log(req.files[0])
-//     const newSlider = new Slider(req.files[0]);
-//     newSlider.save((err, slider) => {
-//         if (err) {
-//             return res.json({ 'success': false, 'message': 'Some Error Found' });
-//         }
+export const addSlider = (req, res) => {
+    console.log(req.files[0])
+    const newSlider = new HomeSlider(req.files[0]);
+    newSlider.save((err, slider) => {
+        if (err) {
+            return res.json({ 'success': false, 'message': 'Some Error Found' });
+        }
 
-//         return res.json({ 'success': true, 'message': 'Slider added successfully', slider });
-//     })
-// }
+        return res.json({ 'success': true, 'message': 'Slider added successfully', slider });
+    })
+}
 
 // export const updateProduct = (req, res) => {
 //     Product.findOneAndUpdate({ _id: req.body.id }, req.body, { new: true }, (err, product) => {

@@ -8,7 +8,7 @@ var Schema = mongoose.Schema({
     ProductType: String,
     RoomType: String,
     Accommodates: String,
-    City: String,
+    City: Object,
     Rooms: {
         Bedrooms: String,
         Beds: String,
@@ -17,7 +17,7 @@ var Schema = mongoose.Schema({
     Listing: {
         ProductType: String,
         RoomType: String,
-        Accommodates: String
+        Accommodates: String,
     },
     Description: {
         Title: String,
@@ -32,8 +32,8 @@ var Schema = mongoose.Schema({
         Zipcode: String
     },
     Amenities: {
-        Common: Array,
-        Additional: Array
+        CommonAmenities: Array,
+        AdditionalAmenities: Array
     },
     Photos: Array,
     Pricing: {

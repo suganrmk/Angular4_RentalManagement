@@ -32,6 +32,8 @@ import {CartComponent} from './cart/cart/cart.component';
 import {CheckoutComponent} from './cart/checkout/checkout.component';
 import {FileUploadModule} from 'primeng/primeng';
 
+import {DataTableModule, SelectButtonModule, CalendarModule, TabViewModule, SharedModule , 
+  DialogModule , DropdownModule, CheckboxModule, PanelModule} from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,7 @@ import {FileUploadModule} from 'primeng/primeng';
     HttpModule,
     FormsModule,
     routing,
+    DropdownModule,
     FileUploadModule
   ],
   providers: [
