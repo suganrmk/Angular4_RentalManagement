@@ -18,10 +18,9 @@ router.route('/slider/:id').delete(homeslider.deleteHomeSlider);
 
 
 //New Products
-router.route('/products')
-    .get(productController.getProducts)
-    .post(productController.addProducts)
-    .put(productController.updateProducts);
+router.route('/products').get(productController.getProducts);
+router.route('/products').post(productController.addProducts);
+router.route('/products').put(productController.updateProducts);
 
 // router.route('/:id')
 //     .get(productController.getProducts)

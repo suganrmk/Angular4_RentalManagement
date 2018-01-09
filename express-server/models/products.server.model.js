@@ -32,8 +32,8 @@ var Schema = mongoose.Schema({
         Zipcode: String
     },
     Amenities: {
-        CommonAmenities: Array,
-        AdditionalAmenities: Array
+        Common: Array,
+        Additional: Array
     },
     Photos: Array,
     Pricing: {
@@ -43,7 +43,7 @@ var Schema = mongoose.Schema({
             Montly: String
         }
     },
-    AvailabeDates: Array
+    UnavailabeDates: Array
 });
 
 export default mongoose.model('Products', Schema);

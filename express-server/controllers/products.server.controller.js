@@ -15,6 +15,7 @@ export const getProducts = (req, res) => {
 }
 
 export const addProducts = (req, res) => {
+    console.log(req.body);
     const newProducts = new Products(req.body);
     newProducts.save((err, product) => {
         if (err) {

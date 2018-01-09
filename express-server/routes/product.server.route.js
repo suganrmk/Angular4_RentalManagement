@@ -44,6 +44,6 @@ router.post('/upload', upload.array("myfile[]", 12), function(req, res, next) {
     });
 });
 
-// router.route('/test/homeSliders').get(homesliderController.getSliders);
+router.route('/test/homeSliders').get(homesliderController.getHomeSliders);
 
 export default router;

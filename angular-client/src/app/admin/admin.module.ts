@@ -13,7 +13,7 @@ import {DataTableModule, SelectButtonModule, CalendarModule, TabViewModule, Shar
 import { CommonServices } from './provider/common.service';
 import { ProductComponent } from './product/product.component';
 import { UsersComponent } from './users/users.component';
-import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
+ import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
 
 @NgModule({
   imports: [
@@ -31,7 +31,6 @@ import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
     FormsModule,
     DropdownModule,
     FileUploadModule,
-    Ng4GeoautocompleteModule.forRoot()
   ],
   providers: [
     CommonServices

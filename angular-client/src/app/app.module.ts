@@ -31,6 +31,7 @@ import {ProductarrayComponent} from './product/product-array/product-array.compo
 import {CartComponent} from './cart/cart/cart.component';
 import {CheckoutComponent} from './cart/checkout/checkout.component';
 import {FileUploadModule} from 'primeng/primeng';
+import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
 
 import {DataTableModule, SelectButtonModule, CalendarModule, TabViewModule, SharedModule , 
   DialogModule , DropdownModule, CheckboxModule, PanelModule} from 'primeng/primeng';
@@ -59,7 +60,8 @@ import {DataTableModule, SelectButtonModule, CalendarModule, TabViewModule, Shar
     FormsModule,
     routing,
     DropdownModule,
-    FileUploadModule
+    FileUploadModule,
+    Ng4GeoautocompleteModule.forRoot()    
   ],
   providers: [
      ProductService,

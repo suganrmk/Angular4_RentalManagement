@@ -5,7 +5,6 @@
             <div class="form-group">
                 <label for="ProductType">ProductType:</label>
                 <p-dropdown [options]="propertytype" [(ngModel)]="products.ProductType" #ProductType="ngModel" name="ProductType"></p-dropdown>
-
             </div>
             <div class="form-group">
                 <label for="RoomType">RoomType:</label>
@@ -17,7 +16,7 @@
             </div>
             <div class="form-group">
                 <label for="City">City:</label>
-                <ng4geo-autocomplete (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
+                <!-- <ng4geo-autocomplete (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete> -->
                 <!-- <input type="text" [(ngModel)]="products.City" #City="ngModel" class="form-control" name="City" id="City" required /> -->
             </div>
         </p-tabPanel>
@@ -35,7 +34,7 @@
                 </div>
                 <div class="form-group">
                     <label for="Bathrooms">Bathrooms</label>
-                    <p-dropdown [options]="accommodates" [(ngModel)]="products.Bathrooms" #Bathrooms="ngModel" name="Bathrooms" id="Bathrooms" required></p-dropdown>
+                    <p-dropdown [options]="bathroom" [(ngModel)]="products.Bathrooms" #Bathrooms="ngModel" name="Bathrooms" id="Bathrooms" required></p-dropdown>
                 </div>
             </div>
             <div ngModelGroup="Listing" #Listing="ngModelGroup" required>
@@ -97,22 +96,29 @@
             </div>
         </p-tabPanel>
         <p-tabPanel header="Amenities">
-            <div ngModelGroup="CommonAmenities" #CommonAmenities="ngModelGroup" required>
+            <div ngModelGroup="Amenities" #Amenities="ngModelGroup" required>
                 <h2>Common Amenities</h2>
                 <p-checkbox name="Common" value="Essentials" label="Essentials" [(ngModel)]="products.Common"></p-checkbox>
                 <p-checkbox name="Common" value="Air Conditioning" label="Air Conditioning" [(ngModel)]="products.Common"></p-checkbox>
-            </div>
-            <div ngModelGroup="AdditionalAmenities" #AdditionalAmenities="ngModelGroup" required>
                 <h2>Additional Amenities</h2>
                 <p-checkbox name="Additional" value="Heating" label="Heating" [(ngModel)]="products.Additional"></p-checkbox>
                 <p-checkbox name="Additional" value="Internet" label="Internet" [(ngModel)]="products.Additional"></p-checkbox>
+
             </div>
+
         </p-tabPanel>
         <p-tabPanel header="Photos">
             <p-fileUpload name="myfile[]" accept="image/*" (onUpload)="onBasicUpload($event)" url="http://localhost:4000/product/upload"></p-fileUpload>
+            <p-dropdown [options]="accommodates" hidden [(ngModel)]="products.Photos" #Photos="ngModel" name="Photos" id="Photos" required></p-dropdown>
 
+            <div *ngFor="let product of ProductImages">
+                <span>{{product.originalname}}</span>
+                <img *ngIf="product.filename" width="100px" src="./assets/uploads/{{product.filename}}" />
+            </div>
         </p-tabPanel>
         <p-tabPanel header="Pricing">
+
+
             <div ngModelGroup="Pricing" #Pricing="ngModelGroup" required>
                 <div class="form-group">
                     <label for="Baseprice">Baseprice</label>
@@ -129,14 +135,12 @@
                     </div>
                 </div>
             </div>
-
         </p-tabPanel>
         <p-tabPanel header="Calender">
             <div class="form-group">
-                <label for="AvailabeDates">AvailabeDates</label>
-                <p-calendar selectionMode="multiple" [(ngModel)]="products.AvailabeDates" #AvailabeDates="ngModel" class="form-control" name="AvailabeDates" id="AvailabeDates" required></p-calendar>
+                <label for="UnavailabeDates">UnavailabeDates</label>
+                <p-calendar selectionMode="multiple" [(ngModel)]="products.UnavailabeDates" #UnavailabeDates="ngModel" class="form-control" name="UnavailabeDates" id="UnavailabeDates" required></p-calendar>
             </div>
-
         </p-tabPanel>
     </p-tabView>
     <button type="button" pButton icon="fa fa-chevron-up" (click)="openPrev()"><i class="fa fa-chevron-up"></i> Previous</button>
