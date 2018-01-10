@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonServices } from '../provider/common.service';
-
+import { Address } from 'angular-google-place';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -16,6 +16,9 @@ export class ProductComponent implements OnInit {
   ProductImages: any = [{
     originalname :"Koala.jpg"
   }];
+  public options = {type : 'address'};
+
+
   constructor(private commonServices: CommonServices) {
     this.propertytype = [
       { label: 'Property type', value: null },
@@ -58,9 +61,13 @@ export class ProductComponent implements OnInit {
    this.commonServices.create('/route/products', value).subscribe(res => console.log(res));
   }
 
-  autoCompleteCallback1(event) {
 
-    const list = event.data.address_components;
+getFormattedAddress(event: any) {
+    console.log(event);
+}  
+
+getAddress(place: Address) {
+  const list = place.address_components;
     for (let i in list) {
       let placetype = list[i].types;
       console.log(placetype)

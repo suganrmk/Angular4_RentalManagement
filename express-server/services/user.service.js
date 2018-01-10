@@ -147,9 +147,7 @@ function update(_id, userParam) {
             lastName: userParam.lastName,
             username: userParam.username,
             cart: userParam.cart,
-
         };
-
         // update password if it was entered
         if (userParam.password) {
             set.hash = bcrypt.hashSync(userParam.password, 10);

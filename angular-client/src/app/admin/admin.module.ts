@@ -14,7 +14,7 @@ import { CommonServices } from './provider/common.service';
 import { ProductComponent } from './product/product.component';
 import { UsersComponent } from './users/users.component';
 import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
-
+import {AngularGooglePlaceModule} from 'angular-google-place';
 
 @NgModule({
   imports: [
@@ -30,6 +30,7 @@ import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
     CalendarModule,
     ReactiveFormsModule,
     FormsModule,
+    AngularGooglePlaceModule,
     DropdownModule,
     FileUploadModule,
     SharedModuled,
@@ -40,14 +41,3 @@ import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
   declarations: [DashboardComponent, SliderComponent, ProductComponent, UsersComponent]
 })
 export class AdminModule { }
-
-
-// import { NgModule } from '@angular/core';
-// import { AdminRoutingModule } from './admin-routing.module';
-// import { DashboardComponent } from './dashboard/dashboard.component';
-
-// @NgModule({
-//   imports: [AdminRoutingModule],
-//   declarations: [DashboardComponent]
-// })
-// export class LazyModule {}
