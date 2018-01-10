@@ -61,7 +61,7 @@ import {DataTableModule, SelectButtonModule, CalendarModule, TabViewModule, Shar
     routing,
     DropdownModule,
     FileUploadModule,
-    Ng4GeoautocompleteModule.forRoot()    
+    Ng4GeoautocompleteModule.forRoot()
   ],
   providers: [
      ProductService,
