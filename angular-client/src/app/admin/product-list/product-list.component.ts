@@ -1,7 +1,7 @@
 // ./angular-client/src/app/product/product-list/product-list.component.ts
 import { Component, OnInit } from '@angular/core';
 
-import { ProductService } from '../product.service';
+import { ProductService } from '../provider/product.service';
 
 
 @Component({

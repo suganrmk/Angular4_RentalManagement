@@ -5,6 +5,8 @@ import { ModuleWithProviders } from '@angular/core';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SliderComponent } from './slider/slider.component';
 import {ProductComponent} from './product/product.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
   {
@@ -18,7 +20,15 @@ const routes: Routes = [
       {
         path: 'product',
         component: ProductComponent
-      }
+      },
+      {
+       path: 'editproducts',
+       component: ProductListComponent
+      },
+      {
+        path: 'users',
+        component: UsersComponent
+       }
     ]
   }
 ];

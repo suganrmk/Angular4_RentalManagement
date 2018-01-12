@@ -12,7 +12,7 @@ export class ProductService {
 
   constructor(private http: Http){ }
 
-  getProducts(): Promise<any>{
+ getProducts(): Promise<any>{
     console.log('products')
       return this.http.get(this.productApi)
                  .toPromise()
@@ -38,10 +38,10 @@ export class ProductService {
     return this.http.post(this.productApi, product)
                .toPromise()
                .then(this.handleData)
-               .catch(this.handleError)
+               .catch(this.handleError )
   }
 
-  updateProduct(product:any):Promise<any>{
+  updateProduct(product: any): Promise<any> {
     return this.http
                .put(this.productApi, product)
                .toPromise()
@@ -49,7 +49,7 @@ export class ProductService {
                .catch(this.handleData);
   }
 
-  deleteProduct(product:any):Promise<any>{
+  deleteProduct(product: any): Promise<any> {
     return this.http
                .delete(this.productApi + product._id)
                .toPromise()

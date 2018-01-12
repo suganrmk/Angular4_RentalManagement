@@ -11,10 +11,14 @@ import { SliderComponent } from './slider/slider.component';
 import {DataTableModule, SelectButtonModule, CalendarModule, TabViewModule, SharedModule,
    DialogModule , DropdownModule, CheckboxModule, PanelModule, FileUploadModule} from 'primeng/primeng';
 import { CommonServices } from './provider/common.service';
+import { ProductService } from './provider/product.service';
+import {UserService} from './provider/index';
 import { ProductComponent } from './product/product.component';
+import { ProductListComponent } from './product-list/product-list.component';
+
 import { UsersComponent } from './users/users.component';
 import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
-import {AngularGooglePlaceModule} from 'angular-google-place';
+// import {AngularGooglePlaceModule} from 'angular-google-place';
 
 @NgModule({
   imports: [
@@ -30,14 +34,21 @@ import {AngularGooglePlaceModule} from 'angular-google-place';
     CalendarModule,
     ReactiveFormsModule,
     FormsModule,
-    AngularGooglePlaceModule,
+    // AngularGooglePlaceModule,
     DropdownModule,
     FileUploadModule,
     SharedModuled,
   ],
   providers: [
-    CommonServices
+    CommonServices,
+    ProductService,
+    UserService
      ],
-  declarations: [DashboardComponent, SliderComponent, ProductComponent, UsersComponent]
+  declarations: [
+    DashboardComponent,
+     SliderComponent,
+      ProductComponent,
+       UsersComponent,
+        ProductListComponent]
 })
 export class AdminModule { }

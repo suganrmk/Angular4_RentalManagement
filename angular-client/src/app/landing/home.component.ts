@@ -1,7 +1,6 @@
 // ./angular-client/src/app/home.component.ts
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { ProductService } from '../product/product.service';
 import { CommonService } from '../_services/common.service';
 
 @Component({
@@ -12,7 +11,7 @@ import { CommonService } from '../_services/common.service';
 export class HomePageComponent implements OnInit, OnDestroy {
   products: any[] = [];
   bannerImg: string;
-  constructor(private productService: ProductService, private commonService: CommonService) { }
+  constructor( private commonService: CommonService) { }
 
   ngOnInit(): void {
     document.body.classList.add('home');

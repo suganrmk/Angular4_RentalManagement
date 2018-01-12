@@ -1,7 +1,6 @@
 // ./angular-client/src/app/header.component.ts
 import { Component, OnInit } from '@angular/core';
 
-import { ProductService } from '../product/product.service';
 
 @Component({
   selector: 'app-header',
@@ -10,11 +9,9 @@ import { ProductService } from '../product/product.service';
 })
 export class HeaderComponent implements OnInit {
   products: any[] = [];
-  constructor(private productService: ProductService) { }
+  constructor() { }
 
   ngOnInit(): void {
-   
   }
 
- 
 }

@@ -1,7 +1,7 @@
 ﻿import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AlertService, UserService } from '../_services/index';
+import { AlertService, CommonService } from '../_services/index';
 
 @Component({
     moduleId: module.id,
@@ -14,12 +14,12 @@ export class RegisterComponent {
 
     constructor(
         private router: Router,
-        private userService: UserService,
+        private commonService: CommonService,
         private alertService: AlertService) { }
 
     register() {
         this.loading = true;
-        this.userService.create(this.model)
+        this.commonService.create('/users/register' , this.model)
             .subscribe(
                 data => {
                     this.alertService.success('Registration successful', true);

@@ -1,7 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
-import { User } from '../_models/index';
 
 @Injectable()
 export class CommonService {
@@ -15,11 +14,11 @@ export class CommonService {
         return this.http.get(url).map((response: Response) => response.json());
     }
 
-    create(url , user: User) {
+    create(url , user) {
         return this.http.post(url, user);
     }
 
-    update(url, user: User) {
+    update(url, user) {
         return this.http.put(url, user);
     }
 

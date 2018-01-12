@@ -1,17 +1,17 @@
 // ./angular-client/src/app/home.component.ts
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../product/product.service';
-import { CartService, UserService } from '../../_services/index';
+import { CartService, CommonService } from '../../_services/index';
 @Component({
     selector: 'app-cart',
     templateUrl: './cart.component.html'
 })
 export class CartComponent implements OnInit {
 
-    cartItems: any[];
+    cartItems: any[] = [];
     cartProduct: any;
 
-    constructor(private productService: ProductService, private cartService: CartService, private userService: UserService) { }
+    constructor(
+                private cartService: CartService, private commonService: CommonService) { }
 
     ngOnInit(): void {
         this.getcartItems();
@@ -20,7 +20,7 @@ export class CartComponent implements OnInit {
     remove(id) {
         const filterproduct = this.cartProduct.cart.filter(t => t._id !== id);
         this.cartProduct.cart = filterproduct;
-        this.userService.update(this.cartProduct).subscribe(res => {
+        this.commonService.update('/users/5a3ea24f049feb2bd08934ce' , this.cartProduct).subscribe(res => {
             this.getcartItems();
         });
 
