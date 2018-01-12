@@ -18,7 +18,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 
 import { UsersComponent } from './users/users.component';
 import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
-// import {AngularGooglePlaceModule} from 'angular-google-place';
+ import {AngularGooglePlaceModule} from 'angular-google-place';
 
 @NgModule({
   imports: [
@@ -34,7 +34,7 @@ import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
     CalendarModule,
     ReactiveFormsModule,
     FormsModule,
-    // AngularGooglePlaceModule,
+     AngularGooglePlaceModule,
     DropdownModule,
     FileUploadModule,
     SharedModuled,

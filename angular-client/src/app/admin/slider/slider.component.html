@@ -1,13 +1,12 @@
 <p-panel>
     <p-header> Slider
         <button (click)="showDialog()" class="btn btn-xs btn-primary pull-right">
-                   <i class="fa fa-plus"></i> Add Slider
-        </button>
+                   <i class="fa fa-plus"></i> Add Slider  </button>
     </p-header>
     <p-dataTable class="" [value]="sliderData">
-        <p-column field="bannerImg" header="Banner Image" [style]="{'width':'120px'}">
+        <p-column field="sliderImage" header="Banner Image" [style]="{'width':'120px'}">
             <ng-template let-col let-data="rowData" pTemplate="body">
-                <img width="100px" src="{{data[col.field]}}">
+                <img width="100px" src="assets/uploads/{{data[col.field].filename}}">
             </ng-template>
         </p-column>
         <p-column field="title" header="Title"></p-column>
@@ -23,10 +22,12 @@
 
 <p-dialog [(visible)]="display">
     <p-header> Slider</p-header>
-    <form (ngSubmit)="onSubmitSlider(sliders);" #sliderForm="ngForm">
+    <form (ngSubmit)="onSubmitSlider(sliderForm);" #sliderForm="ngForm">
         <div class="form-group">
-            <label for="bannerImg">Banner Image:</label>
-            <input type="text" [(ngModel)]="sliders.bannerImg" #bannerImg="ngModel" class="form-control" name="bannerImg" id="bannerImg" required />
+            <label for="sliderImage">Banner Image:</label>
+            <p-fileUpload name="myfile[]" accept="image/*" (onUpload)="onBasicUpload($event)" url="http://localhost:4000/product/upload"></p-fileUpload>
+            <!-- <img width="100px" *ngIf="imagePreview" src="{{imagePreview}}" /> -->
+            <input type="text" [(ngModel)]="sliders.sliderImage" #sliderImage="ngModel" class="form-control hide" name="sliderImage" id="sliderImage" required />
         </div>
         <div class="form-group">
             <label for="title">Title:</label>

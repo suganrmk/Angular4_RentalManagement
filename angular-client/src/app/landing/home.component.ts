@@ -11,15 +11,18 @@ import { CommonService } from '../_services/common.service';
 export class HomePageComponent implements OnInit, OnDestroy {
   products: any[] = [];
   bannerImg: string;
+  cars: any[]
   constructor( private commonService: CommonService) { }
 
   ngOnInit(): void {
     document.body.classList.add('home');
 
     this.commonService.getAll('/product/test/homeSliders').subscribe((res) => {
-      console.log(res.sliders[0]);
-      this.bannerImg = res.sliders[0].filename;
+      console.log(res);
+      this.bannerImg = res.homesliders;
     });
+
+ 
 
   }
   ngOnDestroy() {

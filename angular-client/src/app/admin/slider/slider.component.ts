@@ -11,6 +11,7 @@ export class SliderComponent implements OnInit {
   display: boolean = false;
   userform: FormGroup;
   sliders: any = {};
+  imagePreview:any;
   constructor(private fb: FormBuilder, private commonServices: CommonServices) { }
 
   ngOnInit() {
@@ -18,6 +19,12 @@ export class SliderComponent implements OnInit {
       this.sliderData = res.homesliders;
       console.log(res);
     });
+  }
+
+  onBasicUpload(ev) {
+    this.imagePreview = ev.files[0].objectURL.changingThisBreaksApplicationSecurity;
+    const uploadedImg = JSON.parse(ev.xhr.response).file[0];
+    this.sliders.sliderImage = uploadedImg;
   }
 
   showDialog(data) {
@@ -28,7 +35,9 @@ export class SliderComponent implements OnInit {
     }
     this.display = true;
   }
-  onSubmitSlider(data) {
+  onSubmitSlider({value}) {
+   const data = this.sliders;
+   console.log(data);
     this.display = false;
     if (data._id) {
       this.updateSlider(data);

@@ -19,9 +19,9 @@ var sliderSchema = mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    bannerImg: String,
     title: String,
-    subtitle: String
+    subtitle: String,
+    sliderImage: Object
 });
 
 

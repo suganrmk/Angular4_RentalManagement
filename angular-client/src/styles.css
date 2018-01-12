@@ -22,6 +22,7 @@ app-productarray {
     position: absolute;
     border: none;
     border-radius: 0;
+    z-index: 88;
 }
 
 app-checkout .cartlistdropdown .dropdown-menu {
@@ -128,4 +129,26 @@ span.cartnum {
     position: relative;
     padding: 1px 0 0 0;
     top: -8px;
+}
+
+p-carousel .ui-carousel-header {
+    position: absolute;
+    bottom: 0;
+    z-index: 9999;
+    width: 99%;
+}
+
+.relative {
+    position: relative
+}
+
+.ui-carousel {
+    height: 655px;
+    display: inline-block;
+    width: 100%;
+    overflow: hidden
+}
+
+p-carousel img {
+    width: 100%;
 }

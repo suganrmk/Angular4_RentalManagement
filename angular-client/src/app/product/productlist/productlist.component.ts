@@ -23,7 +23,9 @@ export class ProductCatComponent implements OnInit {
   constructor(private commonService: CommonService) { }
 
   ngOnInit(): void {
-    this.commonService.getAll(appConfig.productApi)
-    .subscribe(products => this.products = products.products);
+    this.commonService.getAll(appConfig.productApi).subscribe(products => {
+      console.log(products)
+      this.products = products.products;
+    });
   }
 }
