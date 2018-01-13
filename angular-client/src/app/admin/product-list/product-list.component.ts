@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ProductService } from '../provider/product.service';
+import { CommonServices } from '../provider/common.service';
 
 
 @Component({
@@ -11,89 +12,28 @@ import { ProductService } from '../provider/product.service';
 })
 export class ProductListComponent implements OnInit {
 
-  product: any = {};
+  // product: any = {};
   products: any[] = [];
 
-  productToEdit: any = {};
-  productToDelete: any = {};
-  fetchingData: boolean = false;
-  apiMessage: string;
-  filesToUpload: Array<File>;
+  selectedRow: any;
 
-  constructor(private productService: ProductService) {  this.filesToUpload = []; }
+  constructor(private productService: ProductService ,  private commonServices: CommonServices) { 
+     }
 
   ngOnInit(): void {
-    this.productService.showAddProductBox = true;
-    this.productService.getProducts().then(td => { this.products = td.products; });
-
-    // this.productService.getslider('/product/test/homeSliders').then(td => console.log(td));
+    this.commonServices.getAll('/product').subscribe(td => { this.products = td.products;   console.log(this.products) });
+  
   }
 
-  AddProduct(product: any): void {
-    console.log(product)
-    if (!product) { return; }
-    this.productService.createProduct(product)
-      .then(td => {
-        this.products.push(td.product);
-      });
-    this.closeev();
+  onDeleteSlider(val) {
+    this.commonServices.delete('/product/' + val._id).subscribe(res => {
+      const index = this.findSelectedRowIndex();
+      this.products = this.products.filter((data, i) => i !== index);
+    });
   }
-
-  closeev() {
-    this.productService.showAddProductBox = true;
+  findSelectedRowIndex(): number {
+    return this.products.indexOf(this.selectedRow);
   }
-  showEditProduct(product: any): void {
-    // console.log(product)
-    this.productToEdit = product;
-    this.apiMessage = " ";
-  }
-  getFiles(fl){
-   console.log(fl)
-  }
-
-  showAddProductBox(e): void {
-    e.preventDefault();
-    this.productService.showAddProductBox = !this.productService.showAddProductBox;
-  }
-
-  EditProduct(product: any): void {
-    if (!product) { return; }
-    // console.log(product)
-    product.id = this.productToEdit._id;
-    this.productService.updateProduct(product)
-      .then(td => {
-        const updatedProducts = this.products.map(t => {
-          if (td.product._id !== t._id) {
-            return t;
-          }
-          return { ...t, ...td.product };
-        });
-        this.apiMessage = td.message;
-        this.closeev();
-
-      });
-  }
-
-  showDeleteProduct(product: any): void {
-    this.productToDelete = product;
-    this.apiMessage = "";
-  }
-
-  DeleteProduct(product: any): void {
-    if (!product) { return; }
-    this.productService.deleteProduct(product)
-      .then(td => {
-        const filteredProducts = this.products.filter(t => t._id !== td.product._id);
-        this.apiMessage = td.message;
-        this.products = filteredProducts;
-      });
-  }
-
-  onBasicUpload(ev, fl){
-    console.log(ev, fl)
-  }
-
-
 
 
 }

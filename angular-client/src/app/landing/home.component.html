@@ -12,7 +12,7 @@
     <!-- <app-productarray [product]="products"></app-productarray> -->
 </div>
 
-<p-carousel numVisible="1" easing="ease-out" *ngIf="bannerImg" [value]="bannerImg">
+<p-carousel numVisible="1" easing="easeOutStrong" circular="circular" autoplayInterval="8000" *ngIf="bannerImg" [value]="bannerImg">
     <ng-template let-slider pTemplate="item">
         <div class="ui-grid ui-grid-responsive">
             <div class="ui-grid-row">

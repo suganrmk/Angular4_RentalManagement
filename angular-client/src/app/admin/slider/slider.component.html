@@ -3,7 +3,7 @@
         <button (click)="showDialog()" class="btn btn-xs btn-primary pull-right">
                    <i class="fa fa-plus"></i> Add Slider  </button>
     </p-header>
-    <p-dataTable class="" [value]="sliderData">
+    <p-dataTable class="" selectionMode="single" [(selection)]="selectedRow" [value]="sliderData">
         <p-column field="sliderImage" header="Banner Image" [style]="{'width':'120px'}">
             <ng-template let-col let-data="rowData" pTemplate="body">
                 <img width="100px" src="assets/uploads/{{data[col.field].filename}}">

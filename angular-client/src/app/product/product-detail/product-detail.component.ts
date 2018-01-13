@@ -25,6 +25,13 @@ export class ProductDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+    console.log(params.id)
+    this.commonService.getById( appConfig.productApi + params.id).subscribe(td =>{
+           this.product =  td.product[0];
+           console.log(this.product)
+    });
+    });
     // this.route.paramMap
     //     .switchMap((params: ParamMap) =>  
     //      console.log( params.get('id'))

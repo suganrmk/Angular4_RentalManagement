@@ -1,10 +1,12 @@
-<form (ngSubmit)="onSubmitSlider(productForm);" #productForm="ngForm">
-    <button type="submit" class="btn btn-success btn-block">Save And Exit</button>
+<form (ngSubmit)="onSubmitProduct(productForm , 'save');" #productForm="ngForm">
+    <button type="button" (click)="onSubmitProduct(productForm)" class="btn btn-success btn-block">Save And Exit</button>
     <p-tabView [activeIndex]="index" orientation="left">
         <p-tabPanel header="Listing">
             <div class="form-group">
                 <label for="ProductType">ProductType:</label>
                 <p-dropdown [options]="propertytype" [(ngModel)]="products.ProductType" #ProductType="ngModel" name="ProductType"></p-dropdown>
+                <input type="text" [(ngModel)]="products._id" #_id="ngModel" class="form-control hide" name="_id" id="_id" required />
+
             </div>
             <div class="form-group">
                 <label for="RoomType">RoomType:</label>
@@ -110,9 +112,9 @@
         </p-tabPanel>
         <p-tabPanel header="Photos">
             <p-fileUpload name="myfile[]" accept="image/*" (onUpload)="onBasicUpload($event)" url="http://localhost:4000/product/upload"></p-fileUpload>
-            <p-dropdown [options]="accommodates" hidden [(ngModel)]="products.Photos" #Photos="ngModel" name="Photos" id="Photos" required></p-dropdown>
+            <p-multiSelect [options]="accommodates" [(ngModel)]="products.Photos" #Photos="ngModel" optionLabel="name" name="Photos" id="Photos"></p-multiSelect>
 
-            <div *ngFor="let product of ProductImages">
+            <div *ngFor="let product of products.Photos">
                 <span>{{product.originalname}}</span>
                 <img *ngIf="product.filename" width="100px" src="./assets/uploads/{{product.filename}}" />
             </div>
@@ -146,4 +148,6 @@
     </p-tabView>
     <button type="button" pButton icon="fa fa-chevron-up" (click)="openPrev()"><i class="fa fa-chevron-up"></i> Previous</button>
     <button type="button" pButton icon="fa fa-chevron-down" (click)="openNext()"><i class="fa fa-chevron-down"></i> Next</button>
+    <button type="button" (click)="onSubmitProduct(productForm , 'submit')" *ngIf="productForm.form.valid" class="btn btn-success btn-block">Pay and Submit for approval</button>
+
 </form>

@@ -11,22 +11,22 @@ export class SliderComponent implements OnInit {
   display: boolean = false;
   userform: FormGroup;
   sliders: any = {};
-  imagePreview:any;
+  imagePreview: any;
+  selectedRow: any;
+
   constructor(private fb: FormBuilder, private commonServices: CommonServices) { }
 
   ngOnInit() {
     this.commonServices.getAll('/route/slider').subscribe((res) => {
       this.sliderData = res.homesliders;
-      console.log(res);
     });
   }
-
+  
   onBasicUpload(ev) {
     this.imagePreview = ev.files[0].objectURL.changingThisBreaksApplicationSecurity;
     const uploadedImg = JSON.parse(ev.xhr.response).file[0];
     this.sliders.sliderImage = uploadedImg;
   }
-
   showDialog(data) {
     if (data) {
       this.sliders = data;
@@ -35,9 +35,8 @@ export class SliderComponent implements OnInit {
     }
     this.display = true;
   }
-  onSubmitSlider({value}) {
-   const data = this.sliders;
-   console.log(data);
+  onSubmitSlider({ value }) {
+    const data = this.sliders;
     this.display = false;
     if (data._id) {
       this.updateSlider(data);
@@ -52,13 +51,16 @@ export class SliderComponent implements OnInit {
   }
   addSlider(val) {
     this.commonServices.create('/route/slider', val).subscribe(res => {
-      console.log(res);
+      this.sliderData = [...this.sliderData, JSON.parse(res['_body']).homesliders];
     });
   }
   onDeleteSlider(val) {
     this.commonServices.delete('/route/slider/' + val._id).subscribe(res => {
-      console.log(res);
+      const index = this.findSelectedRowIndex();
+      this.sliderData = this.sliderData.filter((data, i) => i !== index);
     });
   }
-
+  findSelectedRowIndex(): number {
+    return this.sliderData.indexOf(this.selectedRow);
+  }
 }

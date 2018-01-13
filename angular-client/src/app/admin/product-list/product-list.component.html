@@ -1,175 +1,28 @@
-<a (click)="showAddProductBox($event)" href="#">Add Product</a>
-<!-- <input type="file" (change)="fileChangeEvent($event)" placeholder="Upload file..." />
-<button type="button" (click)="upload()">Upload</button> -->
-<p-fileUpload name="myfile[]" accept="image/*" customUpload="true" (uploadHandler)="onBasicUpload($event, fil)" url="http://localhost:4000/product/upload"></p-fileUpload>
+<p-panel>
+    <p-header> Product
+        <button [routerLink]="['/admin/product']" class="btn btn-xs btn-primary pull-right">
+                       <i class="fa fa-plus"></i> Create New Product  </button>
+    </p-header>
+    <p-dataTable class="" selectionMode="single" [(selection)]="selectedRow" [value]="products">
+        <p-column field="Photos" header="Product Image" [style]="{'width':'120px'}">
+            <ng-template let-col let-data="rowData" pTemplate="body">
+                <img width="100px" src="assets/uploads/{{data[col.field][0].filename}}">
+            </ng-template>
+        </p-column>
+        <p-column field="Description.Title" header="Product Name"></p-column>
+        <p-column field="Description.Summary" header="Product Description"></p-column>
+        <p-column field="status" header="Status"></p-column>
 
+        <p-column field="Description.Summary" header="Action" [style]="{'width':'100px'}">
+            <ng-template let-col let-data="rowData" pTemplate="body">
+                <button type="button" [routerLink]="['/product', data._id]" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></button>
+                <button type="button" [routerLink]="['/admin/product']" [queryParams]="{ product: data._id }" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></button>
+                <button type="button" (click)="onDeleteSlider(data)" class="btn btn-warning btn-xs"><i class="fa fa-close"></i></button>
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+</p-panel>
 
-
-
-
-<div align="center" class="AddProductBox" [hidden]="productService.showAddProductBox">
-    <h4>Add New Product</h4>
-    <form (ngSubmit)="AddProduct(product);" #productForm="ngForm">
-        <div class="form-group">
-            <label for="productName">Product:</label>
-            <input type="text" [(ngModel)]="product.productName" #productName="ngModel" class="form-control" name="productName" id="productText" required />
-            <div [hidden]="productName.valid || productName.pristine" class="alert alert-danger">
-                Product is required
-            </div>
-        </div>
-
-        <!-- <div class="form-group">
-            <label for="productImg">File Upload:{{product.productImg}}</label>
-            <input type="file" (change)="getFiles($event)" class="form-control" [(ngModel)]="product.productImg" #productImg="ngModel" name="productImg" id="productImg" required />
-            <div [hidden]="productImg.valid || productImg.pristine" class="alert alert-danger">
-            </div>
-        </div> -->
-
-
-
-        <div class="form-group">
-            <label for="productDesc">Description:</label>
-            <textarea class="form-control" [(ngModel)]="product.productDesc" #productDesc="ngModel" name="productDesc" id="productDesc" required></textarea>
-            <div [hidden]="productDesc.valid || productDesc.pristine" class="alert alert-danger">
-                Description is required
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="productPrice">Price:</label>
-            <textarea class="form-control" [(ngModel)]="product.productPrice" #productPrice="ngModel" name="productPrice" id="productPrice" required></textarea>
-            <div [hidden]="productPrice.valid || productPrice.pristine" class="alert alert-danger">
-                Description is required
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <label for="productAvail">Availability:</label>
-            <textarea class="form-control" [(ngModel)]="product.productAvail" #productAvail="ngModel" name="productAvail" id="productAvail" required></textarea>
-            <div [hidden]="productAvail.valid || productAvail.pristine" class="alert alert-danger">
-                Description is required
-            </div>
-        </div>
-
-        <button type="button" class="btn btn-primary" (click)="closeev($event)">Close</button>
-        <button type="submit" [disabled]="!productForm.form.valid" class="btn btn-success btn-block">Submit</button>
-    </form>
-</div>
-
-<br><br><br>
-<table id="mytable" [hidden]="!productService.showAddProductBox" class="table table-bordred table-striped">
-
-    <thead>
-        <th>Product</th>
-        <th>View</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </thead>
-    <tbody>
-
-        <tr *ngFor="let product of products">
-            <td>{{product.productName}}</td>
-            <td><a [routerLink]="['/product', product._id]" title="Click to Open {{product.productText}}">View</a></td>
-            <td>
-                <p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" (click)="showEditProduct(product)" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p>
-            </td>
-            <td>
-                <p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" (click)="showDeleteProduct(product)" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button></p>
-            </td>
-        </tr>
-
-        <tr>
-    </tbody>
-</table>
-
-<div *ngIf="products.length > 0" class="ProductListBox">
-
-    <!-- Edit Modal -->
-    <div class="modal fade" id="edit" role="dialog">
-        <div class="modal-dialog modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Edit Product</h4>
-                </div>
-                <div class="modal-body">
-                    <div align="center" class="EditProductBox">
-                        <form (ngSubmit)="EditProduct(productToEdit)" #editProductForm="ngForm">
-                            <div class="form-group">
-                                <label for="productName">Product:</label>
-                                <input type="text" [(ngModel)]="productToEdit.productName" #productName="ngModel" class="form-control" name="productName" id="productText" required />
-                                <div [hidden]="productName.valid || productName.pristine" class="alert alert-danger">
-                                    Product is required
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="productDesc">Description:</label>
-                                <textarea class="form-control" [(ngModel)]="productToEdit.productDesc" #productDesc="ngModel" name="productDesc" id="productDesc" required></textarea>
-                                <div [hidden]="productDesc.valid || productDesc.pristine" class="alert alert-danger">
-                                    Description is required
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="productPrice">Price:</label>
-                                <textarea class="form-control" [(ngModel)]="productToEdit.productPrice" #productPrice="ngModel" name="productPrice" id="productPrice" required></textarea>
-                                <div [hidden]="productPrice.valid || productPrice.pristine" class="alert alert-danger">
-                                    Description is required
-                                </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="productAvail">Availability:</label>
-                                <textarea class="form-control" [(ngModel)]="productToEdit.productAvail" #productAvail="ngModel" name="productAvail" id="productAvail" required></textarea>
-                                <div [hidden]="productAvail.valid || productAvail.pristine" class="alert alert-danger">
-                                    Description is required
-                                </div>
-                            </div>
-
-
-                            <button type="submit" [disabled]="!editProductForm.form.valid || !editProductForm.form.dirty" class="btn btn-success btn-block">Submit</button>
-                        </form>
-                        <div style="margin:10px;" *ngIf="apiMessage" align="center" class="alert alert-success" role="alert">
-                            <strong>{{apiMessage}}</strong>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Delete Modal -->
-    <div class="modal fade" id="delete" role="dialog">
-        <div class="modal-dialog modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Delete Product</h4>
-                </div>
-                <div class="modal-body">
-                    <div align="center" class="DeleteProductBox">
-                        <div *ngIf="!apiMessage" align="center" class="alert alert-danger" role="alert">
-                            <p>Are you sure want to delete this product?</p>
-                            <strong>{{productToDelete.productName}}</strong>
-                        </div>
-                        <div style="margin:10px;" *ngIf="apiMessage" align="center" class="alert alert-success" role="alert">
-                            {{apiMessage}}
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" *ngIf="!apiMessage" (click)="DeleteProduct(productToDelete)">Confirm</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div *ngIf="products.length <= 0" class="NoProductsBox">
     <div align="center" class="alert alert-info" role="alert">

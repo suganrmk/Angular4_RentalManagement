@@ -43,7 +43,8 @@ var Schema = mongoose.Schema({
             Montly: String
         }
     },
-    UnavailabeDates: Array
+    UnavailabeDates: Array,
+    status: String
 });
 
 export default mongoose.model('Products', Schema);

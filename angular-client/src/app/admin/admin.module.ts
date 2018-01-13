@@ -9,7 +9,7 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SliderComponent } from './slider/slider.component';
 import {DataTableModule, SelectButtonModule, CalendarModule, TabViewModule, SharedModule,
-   DialogModule , DropdownModule, CheckboxModule, PanelModule, FileUploadModule} from 'primeng/primeng';
+   DialogModule , DropdownModule, MultiSelectModule, CheckboxModule, PanelModule, FileUploadModule} from 'primeng/primeng';
 import { CommonServices } from './provider/common.service';
 import { ProductService } from './provider/product.service';
 import {UserService} from './provider/index';
@@ -25,6 +25,7 @@ import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
     CommonModule,
     AdminRoutingModule,
     DataTableModule,
+    MultiSelectModule,
     SharedModule,
     SelectButtonModule,
     DialogModule,

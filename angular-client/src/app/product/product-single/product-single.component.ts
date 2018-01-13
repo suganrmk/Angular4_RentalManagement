@@ -12,6 +12,7 @@ export class ProductsingleComponent implements OnInit {
   @Input() productName;
   @Input() productPrice;
   @Input() productId;
+  @Input() productImg;
   cartProduct: any;
   addedProduct: any;
 

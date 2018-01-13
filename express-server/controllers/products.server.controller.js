@@ -27,7 +27,8 @@ export const addProducts = (req, res) => {
 }
 
 export const updateProducts = (req, res) => {
-    Products.findOneAndUpdate({ _id: req.body.id }, req.body, { new: true }, (err, product) => {
+    console.log(req.body)
+    Products.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, product) => {
         if (err) {
             return res.json({ 'success': false, 'message': 'Some Error', 'error': err });
         }

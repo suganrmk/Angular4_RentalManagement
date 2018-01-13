@@ -149,6 +149,12 @@ p-carousel .ui-carousel-header {
     overflow: hidden
 }
 
+body .ui-carousel,
+body .ui-carousel .ui-carousel-viewport .ui-carousel-items .ui-carousel-item {
+    padding: 0;
+    margin: 0;
+}
+
 p-carousel img {
     width: 100%;
 }

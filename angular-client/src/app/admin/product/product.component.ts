@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonServices } from '../provider/common.service';
 import { Address } from 'angular-google-place';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -8,18 +9,20 @@ import { Address } from 'angular-google-place';
 })
 export class ProductComponent implements OnInit {
   products: any = {};
+  sub: any;
   index: number = 0;
   propertytype: any;
   roomtype: any;
   accommodates: any;
-  bathroom:any;
-  ProductImages: any = [{
-    originalname :"Koala.jpg"
-  }];
-  public options = {type : 'address'};
+  bathroom: any;
+  ProductImages: any = [];
+  eventType: string;
 
 
-  constructor(private commonServices: CommonServices) {
+  constructor(
+    private commonServices: CommonServices,
+    private route: ActivatedRoute,
+    private router: Router) {
     this.propertytype = [
       { label: 'Property type', value: null },
       { label: 'Cabin', value: 'Cabin' },
@@ -45,32 +48,72 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.sub = this.route.queryParams.subscribe(params => {
+      if (params['product']) {
+        this.commonServices.getById('/product/' + params['product']).subscribe(res => {
+          this.eventType = 'edit';
+          const products = res.product[0];
+          const dateArray = [];
+          for (let i = 0; i <  products.UnavailabeDates.length; i++) {
+            dateArray.push(new Date(products.UnavailabeDates[i]));
+          }
+          this.products = {
+            '_id': products._id,
+            'ProductType': products.ProductType,
+            'RoomType': products.RoomType,
+            'Accommodates': products.Accommodates,
+            'City': products.City,
+            'Title': products.Description.Title,
+            'Summary': products.Description.Summary,
+            'Bedrooms': products.Rooms.Bedrooms,
+            'Beds': products.Rooms.Beds,
+            'Bathrooms': products.Rooms.Bathrooms,
+            'Country': products.Location.Country,
+            'Street1': products.Location.Street1,
+            'Street2': products.Location.Street2,
+            'State': products.Location.State,
+            'Zipcode': products.Location.Zipcode ,
+            'Common': products.Amenities.Common ,
+            'Additional': products.Amenities.Additional,
+            'Photos': products.Photos,
+            'Baseprice': products.Pricing.Baseprice,
+            'Weekly': products.Pricing.Longtermprice.Weekly,
+            'Montly': products.Pricing.Longtermprice.Montly,
+            'UnavailabeDates': dateArray
+          };
+        });
+      } else {
+        this.products = {};
+        this.eventType = 'create';
+      }
+    });
   }
 
   openNext() {
     this.index = (this.index === 2) ? 0 : this.index + 1;
   }
-
   openPrev() {
     this.index = (this.index === 0) ? 2 : this.index - 1;
   }
-  onSubmitSlider({ value, valid }) {
-    value.City = this.products.City;
-    console.log(value);
-
-   this.commonServices.create('/route/products', value).subscribe(res => console.log(res));
+  onSubmitProduct({ value, valid } , ev) {
+    if ( ev === 'submit') { 
+      value.status = 'Pending';
+    } else {
+      value.status = 'Draft';
+    }
+     if ( this.eventType === 'create') {
+     this.commonServices.create('/route/products', value).subscribe(res => console.log(res));
+     }else if ( this.eventType === 'edit') {
+      this.commonServices.update('/route/products', value).subscribe(res => console.log(res));
+     }
   }
-
-
-getFormattedAddress(event: any) {
+  getFormattedAddress(event: any) {
     console.log(event);
-}  
-
-getAddress(place: Address) {
-  const list = place.address_components;
+  }
+  getAddress(place: Address) {
+    const list = place.address_components;
     for (let i in list) {
       let placetype = list[i].types;
-      console.log(placetype)
       if (placetype.includes('neighborhood')) {
         this.products.Street1 = list[i].long_name;
       }
@@ -95,8 +138,6 @@ getAddress(place: Address) {
     const uploadedImg = JSON.parse(ev.xhr.response).file[0];
     this.ProductImages.push(uploadedImg);
     this.products.Photos = this.ProductImages;
-    
-    console.log( this.products)
   }
 
 }

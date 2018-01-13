@@ -10,8 +10,8 @@ constructor(private http: Http) { }
           return this.http.get(url).map((response: Response) => response.json());
       }
   
-      getById(_id: string) {
-          return this.http.get('/users/' + _id).map((response: Response) => response.json());
+      getById(url) {
+          return this.http.get(url).map((response: Response) => response.json());
       }
   
       create(url , data) {

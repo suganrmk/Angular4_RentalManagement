@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div *ngIf="product.Description" class="container-fluid">
     <div class="content-wrapper">
         <div class="item-container">
             <div class="container">
@@ -6,17 +6,17 @@
                     <div class="product col-md-12 service-image-left">
 
                         <div>
-                            <img src="http://www.corsair.com/Media/catalog/product/g/s/gs600_psu_sideview_blue_2.png" alt="" />
+                            <img src="assets/uploads/{{product.Photos[0].filename}}" alt="" />
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-7">
-                    <div class="product-title">{{product.productName}}</div>
-                    <div class="product-desc">{{product.productDesc}}</div>
+                    <div class="product-title">{{product.Description.Title}}</div>
+                    <div class="product-desc">{{product.Description.Summary}}</div>
                     <div class="product-rating"><i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star-o"></i> </div>
                     <hr>
-                    <div class="product-price">$ {{product.productPrice}}</div>
+                    <div class="product-price">$ {{product.Pricing.Baseprice}}</div>
                     <div class="product-stock">In Stock</div>
                     <hr>
                     <div class="btn-group cart">

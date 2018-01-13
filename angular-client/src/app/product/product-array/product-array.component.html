@@ -1,2 +1,2 @@
-<app-productsingle *ngFor="let product of product" productName="{{product.Description.Title}}" productId="{{product._id}}" productPrice=" {{product.Pricing.Baseprice}} ">
+<app-productsingle *ngFor="let product of product" productName="{{product.Description.Title}}" productImg="{{product.Photos[0].filename}}" productId="{{product._id}}" productPrice=" {{product.Pricing.Baseprice}} ">
 </app-productsingle>
