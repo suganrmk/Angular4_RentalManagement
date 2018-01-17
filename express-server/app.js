@@ -6,15 +6,12 @@ import logger from 'morgan';
 import mongoose from 'mongoose';
 import SourceMapSupport from 'source-map-support';
 import bb from 'express-busboy';
-var multer = require("multer");
 
 var cors = require('cors');
 var bodyParser = require('body-parser');
 var expressJwt = require('express-jwt');
 var config = require('config.json');
 
-// import routes
-import productRoutes from './routes/product.server.route';
 import route from './route';
 
 
@@ -39,20 +36,6 @@ app.use(function(req, res, next) {
 });
 
 
-
-
-
-// app.post("/upload", multer({ dest: "./uploads/" }).array("myfile[]", 12), function(req, res) {
-//     console.log(req.files)
-//     res.send(req.files);
-// });
-
-// express-busboy to parse multipart/form-data and x-www-form-urlencoded both
-// bb.extend(app);
-
-
-
-
 // configure app
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -71,11 +54,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 //     }
 // }).unless({ path: ['/users/authenticate', '/users/register', '/product/upload'] }));
 
-// routes
-app.use('/users', require('./controllers/users.controller'));
-
-// set the port
-// const port = process.env.PORT || 4000;
 
 // connect to database
 mongoose.Promise = global.Promise;
@@ -86,7 +64,7 @@ mongoose.connect('mongodb://localhost/mern-todo-app', {
 // add Source Map Support
 SourceMapSupport.install();
 
-app.use('/product', productRoutes);
+app.use('/users', require('./controllers/users.controller'));
 app.use('/route', route);
 
 app.get('/', (req, res) => {
@@ -100,13 +78,6 @@ app.use((req, res, next) => {
     res.status(404).send('<h2 align=center>Page Not Found!</h2>');
 });
 
-
-
-
-// start the server
-// app.listen(port, () => {
-//     console.log(`App Server Listening at ${port}`);
-// });
 
 // start server
 var port = process.env.NODE_ENV === 'production' ? 80 : 4000;

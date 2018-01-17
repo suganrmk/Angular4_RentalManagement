@@ -50,7 +50,7 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
     this.sub = this.route.queryParams.subscribe(params => {
       if (params['product']) {
-        this.commonServices.getById('/product/' + params['product']).subscribe(res => {
+        this.commonServices.getById('/route/products/' + params['product']).subscribe(res => {
           this.eventType = 'edit';
           const products = res.product[0];
           const dateArray = [];
@@ -96,16 +96,20 @@ export class ProductComponent implements OnInit {
     this.index = (this.index === 0) ? 2 : this.index - 1;
   }
   onSubmitProduct({ value, valid } , ev) {
-    if ( ev === 'submit') { 
-      value.status = 'Pending';
-    } else {
-      value.status = 'Draft';
-    }
-     if ( this.eventType === 'create') {
-     this.commonServices.create('/route/products', value).subscribe(res => console.log(res));
-     }else if ( this.eventType === 'edit') {
-      this.commonServices.update('/route/products', value).subscribe(res => console.log(res));
-     }
+    const currentUserId = JSON.parse(localStorage.getItem('currentUser'));
+    value.host = currentUserId._id;
+    console.log(value)
+    
+      if ( ev === 'submit') { 
+        value.status = 'Pending';
+      } else {
+        value.status = 'Draft';
+      }
+      if ( this.eventType === 'create') {
+      this.commonServices.create('/route/products', value).subscribe(res => console.log(res));
+      }else if ( this.eventType === 'edit') {
+        this.commonServices.update('/route/products', value).subscribe(res => console.log(res));
+      }
   }
   getFormattedAddress(event: any) {
     console.log(event);

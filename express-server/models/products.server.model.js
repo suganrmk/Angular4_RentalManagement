@@ -1,6 +1,9 @@
 import mongoose from 'mongoose';
+import HomeSlider from './slider.server.model';
+import users from './users.server.model'
+var Schema = mongoose.Schema;
 
-var Schema = mongoose.Schema({
+var productSchema = mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
@@ -44,7 +47,10 @@ var Schema = mongoose.Schema({
         }
     },
     UnavailabeDates: Array,
-    status: String
+    status: String,
+    slider: { type: Schema.Types.ObjectId, ref: 'HomeSlider' },
+    host: { type: Schema.Types.ObjectId, ref: 'users' },
+
 });
 
-export default mongoose.model('Products', Schema);
+export default mongoose.model('Products', productSchema);

@@ -9,10 +9,10 @@ export const getProducts = (req, res) => {
         if (err) {
             return res.json({ 'success': false, 'message': 'Some Error in products' });
         }
-
         return res.json({ 'success': true, 'message': 'products fetched successfully', products });
     });
 }
+
 
 export const addProducts = (req, res) => {
     console.log(req.body);
@@ -21,7 +21,6 @@ export const addProducts = (req, res) => {
         if (err) {
             return res.json({ 'success': false, 'message': 'Some Error tod' });
         }
-
         return res.json({ 'success': true, 'message': 'Products added successfully', product });
     })
 }
@@ -38,7 +37,10 @@ export const updateProducts = (req, res) => {
 }
 
 export const getProduct = (req, res) => {
-    Products.find({ _id: req.params.id }).exec((err, product) => {
+    console.log(req.params.id)
+
+    Products.find({ _id: req.params.id }).populate('host').exec((err, product) => {
+        console.log('product', product)
         if (err) {
             return res.json({ 'success': false, 'message': 'Some Errord' });
         }
@@ -55,7 +57,6 @@ export const deleteProducts = (req, res) => {
         if (err) {
             return res.json({ 'success': false, 'message': 'Some Error' });
         }
-
         return res.json({ 'success': true, 'message': 'Products Deleted Successfully', product });
     })
 }

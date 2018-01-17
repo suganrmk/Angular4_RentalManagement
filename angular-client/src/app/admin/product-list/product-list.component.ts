@@ -21,12 +21,12 @@ export class ProductListComponent implements OnInit {
      }
 
   ngOnInit(): void {
-    this.commonServices.getAll('/product').subscribe(td => { this.products = td.products;   console.log(this.products) });
+    this.commonServices.getAll('/route/products').subscribe(td => { this.products = td.products;   console.log(this.products) });
   
   }
 
   onDeleteSlider(val) {
-    this.commonServices.delete('/product/' + val._id).subscribe(res => {
+    this.commonServices.delete('/route/products/' + val._id).subscribe(res => {
       const index = this.findSelectedRowIndex();
       this.products = this.products.filter((data, i) => i !== index);
     });

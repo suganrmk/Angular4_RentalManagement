@@ -16,6 +16,7 @@ export const getHomeSliders = (req, res) => {
     });
 }
 
+
 export const addHomeSlider = (req, res) => {
     console.log(req.body)
     const newSlider = new HomeSlider(req.body);
