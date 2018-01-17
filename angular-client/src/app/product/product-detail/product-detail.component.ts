@@ -3,26 +3,56 @@ import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/switchMap';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
+import { CartService , CommonService} from '../../_services/index';
+import { appConfig } from '../../app.config';
 
-import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-product-detail',
-  templateUrl: './product-detail.component.html'
+  templateUrl: './product-detail.component.html',
+  styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
   product: any[]= [];
+  cartProduct: any;
+  addedProduct: any;
 
   constructor(
-    private productService: ProductService,
+    private commonService: CommonService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private cartService: CartService
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap
-        .switchMap((params: ParamMap) => this.productService.getProduct(params.get('id')))
-        .subscribe(td => this.product =  td.product[0]);
+    this.route.params.subscribe(params => {
+    console.log(params.id)
+    this.commonService.getById( appConfig.productApi + params.id).subscribe(td => {
+           this.product =  td.product[0];
+           console.log(td)
+    });
+    });
+    // this.route.paramMap
+    //     .switchMap((params: ParamMap) =>
+    //      console.log( params.get('id'))
+    //      params.get('id')
+    //     // this.commonService.getById( appConfig + ).subscribe(td =>
+    //     //    this.product =  td.product[0]
+    //     // );
+    //     });
+    }
+  addtoCart(id) {
+    this.commonService.getById(id).subscribe(td => {
+      this.addedProduct = td.product[0];
+      this.cartService.cartItems.subscribe(res => this.cartProduct = res);
+     const filterproduct = this.cartProduct.cart.filter(t => t._id === id);
+     if (filterproduct.length === 0) {
+      this.cartProduct.cart.push(this.addedProduct);
+      // this.userService.update(this.cartProduct).subscribe(res => console.log(res));
+     }else {
+       alert('already added to cart');
+     }
+    });
   }
 
   goBack(): void {

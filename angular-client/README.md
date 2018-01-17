@@ -30,3 +30,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 //reference
     
 https://github.com/cornflourblue/mean-angular2-registration-login-example
+
+
+## Google map and city searh
+
+https://github.com/psykolm22/angular-google-place/

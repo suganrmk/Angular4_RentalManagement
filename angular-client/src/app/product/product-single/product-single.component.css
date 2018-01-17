@@ -1,9 +1,10 @@
 .productHolder {
     float: left;
-    width: 380px;
-    height: 300px;
+    width: 307px;
+    height: 270px;
     position: relative;
     transition: all 500ms ease;
+    overflow: hidden;
 }
 
 .productcontent {

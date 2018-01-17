@@ -1,1 +1,34 @@
-<app-productarray [product]="products"></app-productarray>
+<!-- <div class="banner">
+    <img src='./assets/uploads/1515068848915.jpg' />
+
+    <div class="bannerContent">
+        <h1>Awesome Fashion 2017</h1>
+        <h2>New Arrivals Collection</h2>
+        <br>
+        <button [routerLink]="['/productlist']" class="btn btn-buy">Shop Now</button>
+    </div>
+</div> -->
+<div class="container">
+    <!-- <app-productarray [product]="products"></app-productarray> -->
+</div>
+
+<p-carousel numVisible="1" easing="easeOutStrong" circular="circular" autoplayInterval="8000" *ngIf="bannerImg" [value]="bannerImg">
+    <ng-template let-slider pTemplate="item">
+        <div class="ui-grid ui-grid-responsive">
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-12 relative">
+
+                    <img src="assets/uploads/{{slider.sliderImage.filename}}">
+                    <div class="bannerContent">
+                        <h1>{{slider.subtitle}}</h1>
+                        <h2>{{slider.title}}</h2>
+                        <br>
+                        <button [routerLink]="['/productlist']" class="btn btn-buy">Shop Now</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </ng-template>
+</p-carousel>
